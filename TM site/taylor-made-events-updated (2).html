@@ -1,0 +1,1803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Taylor-Made Events | Luxury Photo Booth &amp; Video Rentals Windsor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="apple-touch-icon.png">
+<style>
+/* ═══════════════════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════════════════ */
+:root {
+  --ink:       #1c1a17;
+  --paper:     #f2ede6;
+  --mid:       #9a948c;
+  --accent:    #e8c97a;
+  --vivid:     #c94f2a;
+  --vivid-txt: #fdf6ec;
+  --f-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --f-body:    'Cormorant Garamond', Garamond, Georgia, serif;
+  --f-serif:   'Libre Baskerville', Baskerville, Georgia, serif;
+  --f-fell:    'IM Fell English', Georgia, serif;
+}
+
+/* ═══════════════════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+img { display: block; max-width: 100%; }
+a { text-decoration: none; }
+ul { list-style: none; }
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--f-body);
+  background: var(--ink);
+  color: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════════════════ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.4rem 3rem;
+}
+nav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(10,10,10,.8), transparent);
+  pointer-events: none;
+}
+.nav-logo {
+  font-family: var(--f-display);
+  font-size: .85rem;
+  font-weight: 700;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--paper);
+  position: relative;
+}
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  position: relative;
+}
+.nav-links a {
+  font-family: var(--f-body);
+  font-size: 1rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--paper);
+  opacity: .75;
+  transition: opacity .3s;
+}
+.nav-links a:hover { opacity: 1; }
+
+/* ═══════════════════════════════════════════════════════
+   DESKTOP SCROLL-SNAP WRAPPER
+═══════════════════════════════════════════════════════ */
+.snap-container {
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+/* ═══════════════════════════════════════════════════════
+   SLIDE BASE
+═══════════════════════════════════════════════════════ */
+.slide {
+  scroll-snap-align: start;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ═══════════════════════════════════════════════════════
+   SLIDE INDICATOR (desktop only)
+═══════════════════════════════════════════════════════ */
+.slide-indicator {
+  position: fixed;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+  z-index: 150;
+}
+.ind-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgba(242,237,230,.3);
+  transition: all .4s;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+.ind-dot.active { background: var(--paper); transform: scale(1.5); }
+body.on-light .ind-dot { background: rgba(10,10,10,.2); }
+body.on-light .ind-dot.active { background: var(--ink); }
+
+/* ═══════════════════════════════════════════════════════
+   SLIDE 1 — HERO
+═══════════════════════════════════════════════════════ */
+#slide-hero {
+  background: var(--ink);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://static.wixstatic.com/media/5aba2c_576f8a74f66148e89a4d6e9528e9a27c~mv2.jpg/v1/fill/w_1400,h_900,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_1677_JPG.jpg');
+  background-size: cover;
+  background-position: center top;
+  filter: grayscale(100%) contrast(1.15);
+  opacity: .35;
+}
+.hero-rule-top {
+  position: absolute;
+  top: 10vh;
+  left: 3rem; right: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.hero-rule-top span {
+  font-family: var(--f-body);
+  font-size: .85rem;
+  letter-spacing: .35em;
+  text-transform: uppercase;
+  color: var(--paper);
+  white-space: nowrap;
+}
+.hr-line { flex: 1; height: 1px; background: var(--paper); opacity: .25; }
+.hero-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 2rem;
+}
+.hero-kicker {
+  font-family: var(--f-body);
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+  letter-spacing: .15em;
+  color: var(--accent);
+  margin-bottom: 1.2rem;
+  animation: fadeUp .9s .2s both;
+}
+.hero-headline {
+  font-family: var(--f-display);
+  font-size: clamp(4rem, 11vw, 11rem);
+  font-weight: 900;
+  line-height: .9;
+  letter-spacing: -.02em;
+  text-transform: uppercase;
+  color: var(--paper);
+  animation: fadeUp 1.1s .4s both;
+}
+.hero-events {
+  display: block;
+  font-style: normal;
+  font-weight: 700;
+  font-size: .45em;
+  letter-spacing: .18em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-top: .15em;
+}
+.hero-headline em {
+  font-style: italic;
+  font-weight: 400;
+  display: block;
+}
+.hero-starting-price {
+  margin-top: 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  animation: fadeIn .9s 1s both;
+}
+.price-line { width: 2rem; height: 1px; background: var(--accent); }
+.hero-starting-price span {
+  font-family: var(--f-body);
+  font-size: 1.8rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-size: 1rem;
+}
+.scroll-hint {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+  cursor: pointer;
+  animation: fadeIn 1s 1.8s both;
+}
+.scroll-hint span {
+  font-size: 1.2rem;
+  letter-spacing: .35em;
+  text-transform: uppercase;
+  color: var(--paper);
+}
+.scroll-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  animation: arrowBounce 1.6s ease-in-out infinite;
+}
+.scroll-arrow::before,
+.scroll-arrow::after {
+  content: '';
+  display: block;
+  width: 10px; height: 10px;
+  border-right: 2px solid var(--paper);
+  border-bottom: 2px solid var(--paper);
+  transform: rotate(45deg);
+}
+.scroll-arrow::after { opacity: .4; margin-top: -6px; }
+
+/* ═══════════════════════════════════════════════════════
+   SLIDE 2 — INTRO
+═══════════════════════════════════════════════════════ */
+#slide-intro {
+  background: var(--paper);
+  color: var(--ink);
+  padding: 9vh 6vw;
+  display: grid;
+  grid-template-columns: 1fr 2px 1.4fr;
+  gap: 5vw;
+  align-items: center;
+}
+.intro-divider { background: rgba(10,10,10,.12); align-self: stretch; }
+.intro-date {
+  font-family: var(--f-body);
+  font-size: .72rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 2rem;
+}
+.intro-headline {
+  font-family: var(--f-display);
+  font-size: clamp(2.2rem, 4.5vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--ink);
+}
+.intro-headline em { font-style: italic; font-weight: 400; }
+.intro-pull {
+  margin-top: 2.5rem;
+  border-top: 2px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding: 1.2rem 0;
+  font-family: var(--f-fell);
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.intro-stats {
+  margin-top: 2rem;
+  display: flex;
+  gap: 2rem;
+}
+.stat-num {
+  font-family: var(--f-display);
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--ink);
+  line-height: 1;
+  display: block;
+}
+.stat-label {
+  font-family: var(--f-body);
+  font-size: .7rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--mid);
+  line-height: 1.4;
+  display: block;
+}
+.intro-body {
+  font-family: var(--f-serif);
+  font-size: 1.1rem;
+  line-height: 1.85;
+  color: var(--ink);
+  column-count: 2;
+  column-gap: 2rem;
+  column-rule: 1px solid rgba(10,10,10,.1);
+}
+.intro-body p + p { margin-top: 1rem; }
+.intro-body strong { font-weight: 700; }
+.intro-img-grid {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: .6rem;
+}
+.intro-img-grid img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: filter .6s;
+}
+.intro-img-grid img:hover { filter: grayscale(20%); }
+
+/* ═══════════════════════════════════════════════════════
+   SLIDE 3 — BOOTH
+═══════════════════════════════════════════════════════ */
+#slide-booth {
+  background: var(--ink);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.booth-left { position: relative; overflow: hidden; }
+.booth-left img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) contrast(1.1);
+}
+.booth-left-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, transparent 60%, var(--ink));
+}
+.booth-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6vh 5vw 6vh 3vw;
+}
+.booth-eyebrow {
+  font-family: var(--f-body);
+  font-size: .7rem;
+  letter-spacing: .4em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+}
+.booth-headline {
+  font-family: var(--f-display);
+  font-size: clamp(2.2rem, 3.5vw, 3.8rem);
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--paper);
+  margin-bottom: 2rem;
+}
+.booth-headline span {
+  display: block;
+  font-style: italic;
+  font-weight: 400;
+  font-size: .65em;
+  color: var(--mid);
+  text-transform: none;
+  margin-bottom: .2rem;
+}
+.booth-rule { width: 3rem; height: 1px; background: var(--accent); margin-bottom: 1.8rem; }
+.booth-body {
+  font-family: var(--f-serif);
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: rgba(242,237,230,.9);
+  max-width: 40ch;
+  margin-bottom: 2rem;
+}
+.booth-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .6rem 2rem;
+  margin-bottom: 2.5rem;
+}
+.feature-item {
+  display: flex;
+  gap: .7rem;
+  font-family: var(--f-body);
+  font-size: 1.15rem;
+  color: var(--paper);
+}
+.feature-item::before { content: '—'; color: var(--accent); flex-shrink: 0; }
+.cta-btn {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  border: 1px solid var(--paper);
+  font-family: var(--f-body);
+  font-size: .82rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--paper);
+  align-self: flex-start;
+  transition: all .4s;
+}
+.cta-btn:hover { background: var(--paper); color: var(--ink); }
+
+/* ═══════════════════════════════════════════════════════
+   SLIDE 4 — COLOUR
+═══════════════════════════════════════════════════════ */
+#slide-colour {
+  background: var(--vivid);
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+}
+.colour-left {
+  padding: 8vh 5vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.colour-stamp {
+  font-family: var(--f-display);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .5em;
+  text-transform: uppercase;
+  background: var(--vivid-txt);
+  color: var(--vivid);
+  display: inline-block;
+  padding: .3rem .8rem;
+  margin-bottom: 2.5rem;
+}
+.colour-headline {
+  font-family: var(--f-display);
+  font-size: clamp(3rem, 6vw, 6rem);
+  font-weight: 900;
+  line-height: .95;
+  text-transform: uppercase;
+  color: var(--vivid-txt);
+  margin-bottom: 2rem;
+}
+.colour-headline em {
+  font-style: italic;
+  font-weight: 400;
+  display: block;
+  font-size: .68em;
+  opacity: .75;
+  margin-top: .2rem;
+}
+.colour-body {
+  font-family: var(--f-fell);
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--vivid-txt);
+  opacity: .9;
+  max-width: 40ch;
+  margin-bottom: 2rem;
+}
+.colour-options {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+.colour-option {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  font-family: var(--f-body);
+  font-size: .8rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--vivid-txt);
+}
+.colour-swatch {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(253,246,236,.5);
+}
+.colour-swatch.bw { background: #1a1a1a; }
+.colour-swatch.col { background: var(--accent); }
+.colour-cta {
+  display: inline-block;
+  padding: 1.1rem 2.8rem;
+  background: var(--vivid-txt);
+  color: var(--vivid);
+  font-family: var(--f-body);
+  font-size: .82rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  align-self: flex-start;
+  transition: all .3s;
+}
+.colour-cta:hover { background: var(--ink); color: var(--vivid-txt); }
+.colour-right { position: relative; overflow: hidden; }
+.colour-right img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  mix-blend-mode: multiply;
+  opacity: .7;
+}
+.colour-right-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--vivid) 0%, transparent 60%);
+  pointer-events: none;
+}
+.colour-photo-caption {
+  position: absolute;
+  bottom: 2rem; right: 2rem;
+  font-family: var(--f-body);
+  font-style: italic;
+  font-size: .75rem;
+  color: rgba(253,246,236,.45);
+  letter-spacing: .1em;
+  writing-mode: vertical-rl;
+}
+
+/* ═══════════════════════════════════════════════════════
+   SLIDE 5 — PRICING
+═══════════════════════════════════════════════════════ */
+#slide-pricing {
+  background: #242018;
+  flex-direction: column;
+  padding: 8vh 5vw;
+  gap: 0;
+}
+.pricing-header {
+  text-align: center;
+  margin-bottom: 4vh;
+}
+.pricing-eyebrow {
+  font-family: var(--f-body);
+  font-size: .95rem;
+  letter-spacing: .45em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .8rem;
+}
+.pricing-headline {
+  font-family: var(--f-display);
+  font-size: clamp(2rem, 4vw, 3.8rem);
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--paper);
+}
+.pricing-headline em {
+  font-style: italic;
+  font-weight: 400;
+  display: block;
+  font-size: .65em;
+  color: var(--mid);
+  text-transform: none;
+  margin-top: .3rem;
+}
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  width: 100%;
+  max-width: 1200px;
+}
+.price-card {
+  border: 1px solid rgba(242,237,230,.12);
+  padding: 2rem 1.8rem;
+  position: relative;
+  transition: border-color .3s;
+  display: flex;
+  flex-direction: column;
+}
+.price-card:hover { border-color: var(--accent); }
+.price-card.featured {
+  border-color: var(--accent);
+  background: rgba(232,201,122,.05);
+}
+.price-tag {
+  position: absolute;
+  top: -.9rem; left: 1.5rem;
+  background: var(--accent);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: .6rem;
+  font-weight: 600;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  padding: .25rem .7rem;
+}
+.pricing-offer-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.2rem;
+  padding: .9rem 1.8rem;
+  border: 1px solid rgba(232,201,122,.3);
+  background: rgba(232,201,122,.06);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.pricing-offer-badge {
+  font-family: var(--f-body);
+  font-size: 1.5rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  background: var(--vivid);
+  color: var(--vivid-txt);
+  padding: .3rem .9rem;
+  white-space: nowrap;
+}
+.pricing-offer-text {
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-family: var(--f-body);
+  font-size: 2.05rem;
+  color: var(--paper);
+}
+.p-orig {
+  text-decoration: line-through;
+  text-decoration-color: var(--vivid);
+  text-decoration-thickness: 2px;
+  color: var(--mid);
+  font-size: 1.75rem;
+}
+.p-disc { color: var(--accent); font-weight: 700; font-size: 1.75rem; }
+.p-hrs  { font-size: 1.10rem; color: var(--mid); letter-spacing: .08em; }
+.p-sep  { color: var(--mid); }
+.p-note { color: var(--accent); font-style: italic; font-size: 1.25rem; }
+
+.card-duration {
+  font-family: var(--f-body);
+  font-size: .95rem;
+  letter-spacing: .35em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: .8rem;
+}
+.card-price {
+  font-family: var(--f-display);
+  font-size: 3.4rem;
+  font-weight: 900;
+  color: var(--paper);
+  line-height: 1;
+  margin-bottom: .3rem;
+}
+.card-price sup { font-size: 1.2rem; font-weight: 400; vertical-align: super; }
+.card-per {
+  display: block;
+  font-family: var(--f-body);
+  font-size: 1.1rem;
+  color: var(--mid);
+  letter-spacing: .1em;
+  margin-bottom: 1.5rem;
+}
+.card-rule { width: 2rem; height: 1px; background: rgba(242,237,230,.2); margin-bottom: 1.5rem; }
+
+/* Best For — replaces repetitive bullet list */
+.card-best-for {
+  font-family: var(--f-body);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: rgba(242,237,230,.75);
+  margin-bottom: 1.8rem;
+  flex: 1;
+}
+.card-best-for em {
+  font-style: italic;
+  color: var(--accent);
+  letter-spacing: .03em;
+}
+
+.card-cta {
+  display: block;
+  text-align: center;
+  padding: .85rem 1.5rem;
+  border: 1px solid rgba(242,237,230,.3);
+  font-family: var(--f-body);
+  font-size: .78rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--paper);
+  transition: all .3s;
+  margin-top: auto;
+}
+.price-card.featured .card-cta { background: var(--accent); border-color: var(--accent); color: var(--ink); }
+.card-cta:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+
+/* Included with every experience */
+.pricing-included {
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 2rem;
+  border: 1px solid rgba(232,201,122,.25);
+  background: rgba(232,201,122,.04);
+  padding: 1.8rem 2.5rem;
+}
+.pricing-included-label {
+  font-family: var(--f-body);
+  font-size: .7rem;
+  letter-spacing: .45em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.2rem;
+}
+.pricing-included-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: .55rem 1.5rem;
+  list-style: none;
+}
+.pricing-included-list li {
+  font-family: var(--f-body);
+  font-size: 1rem;
+  color: rgba(242,237,230,.85);
+  display: flex;
+  gap: .5rem;
+}
+.pricing-included-list li::before {
+  content: '✓';
+  color: var(--accent);
+  font-size: .75rem;
+  flex-shrink: 0;
+  margin-top: .15rem;
+}
+
+.pricing-addon {
+  margin-top: 1.5vh;
+  text-align: center;
+}
+.pricing-addon p {
+  font-family: var(--f-body);
+  font-size: 1rem;
+  letter-spacing: .1em;
+  color: var(--mid);
+}
+.pricing-addon strong { color: var(--accent); font-weight: 400; }
+
+/* ═══════════════════════════════════════════════════════
+   SLIDE 6 — ADD-ONS
+═══════════════════════════════════════════════════════ */
+#slide-addons {
+  background: var(--paper);
+  color: var(--ink);
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 8vh 7vw;
+}
+.addons-eyebrow {
+  font-family: var(--f-body);
+  font-size: .7rem;
+  letter-spacing: .45em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 1rem;
+}
+.addons-headline {
+  font-family: var(--f-display);
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 900;
+  line-height: .95;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 4vh;
+}
+.addons-headline em { font-style: italic; font-weight: 400; display: block; }
+.addons-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  border-top: 2px solid var(--ink);
+}
+.addon-card {
+  padding: 2rem 2rem 2rem 0;
+  border-right: 1px solid rgba(10,10,10,.12);
+  display: flex;
+  flex-direction: column;
+}
+.addon-card:not(:first-child) { padding-left: 2rem; }
+.addon-card:last-child { border-right: none; }
+.addon-photo {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  margin-bottom: 1.2rem;
+  filter: grayscale(15%);
+  transition: filter .5s;
+}
+.addon-photo:hover { filter: grayscale(0%); }
+.addon-name {
+  font-family: var(--f-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: .4rem;
+}
+.addon-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
+  margin-bottom: 1rem;
+}
+.addon-price {
+  font-family: var(--f-display);
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--ink);
+  line-height: 1;
+}
+.addon-price sup { font-size: 1rem; font-weight: 400; vertical-align: super; }
+.addon-note {
+  font-family: var(--f-body);
+  font-size: .88rem;
+  color: var(--mid);
+  letter-spacing: .1em;
+}
+.addon-desc {
+  font-family: var(--f-serif);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: rgba(10,10,10,.65);
+  margin-bottom: 1.2rem;
+}
+.addon-includes { display: flex; flex-direction: column; gap: .4rem; }
+.addon-includes li {
+  font-family: var(--f-body);
+  font-size: 1.05rem;
+  color: var(--ink);
+  display: flex;
+  gap: .5rem;
+}
+.addon-includes li::before { content: '·'; color: var(--mid); flex-shrink: 0; }
+.addons-rates {
+  margin-top: 3vh;
+  width: 100%;
+  border-top: 1px solid rgba(10,10,10,.12);
+  padding-top: 2rem;
+}
+.addons-rates-label {
+  font-family: var(--f-body);
+  font-size: .72rem;
+  letter-spacing: .4em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 1rem;
+}
+.addons-rates-grid {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  gap: .5rem 2.5rem;
+  align-items: center;
+  font-family: var(--f-body);
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+.addons-rates-grid strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.addons-footnote {
+  margin-top: 3vh;
+  font-family: var(--f-body);
+  font-style: italic;
+  font-size: .98rem;
+  color: var(--mid);
+}
+
+/* ═══════════════════════════════════════════════════════
+   SLIDE 7 — WHY
+═══════════════════════════════════════════════════════ */
+#slide-why {
+  display: flex;
+  background: #242018;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 8vh 8vw;
+}
+.why-rule {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 700px;
+  margin-bottom: 3rem;
+}
+.why-rule-line { flex: 1; height: 1px; background: var(--mid); opacity: .3; }
+.why-rule-text {
+  font-size: .82rem;
+  letter-spacing: .45em;
+  text-transform: uppercase;
+  color: var(--mid);
+  white-space: nowrap;
+}
+.why-headline {
+  font-family: var(--f-display);
+  font-size: clamp(1.8rem, 4vw, 4.5rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.2;
+  color: var(--paper);
+  max-width: 800px;
+  margin-bottom: 4vh;
+}
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 2.5rem;
+}
+.why-num {
+  font-family: var(--f-display);
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1;
+  display: block;
+}
+.why-label {
+  font-family: var(--f-body);
+  font-size: .88rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--mid);
+  line-height: 1.4;
+  display: block;
+  margin-top: .4rem;
+}
+.why-body {
+  font-family: var(--f-serif);
+  font-size: 1.1rem;
+  line-height: 1.9;
+  color: rgba(242,237,230,.75);
+  max-width: 580px;
+  margin-bottom: 2.5rem;
+}
+.why-location {
+  font-family: var(--f-body);
+  font-size: 1.2rem;
+  letter-spacing: .4em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ═══════════════════════════════════════════════════════
+   SLIDE 8 — CONTACT
+═══════════════════════════════════════════════════════ */
+#slide-contact {
+  background: var(--paper);
+  color: var(--ink);
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  padding: 0;
+}
+.contact-main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 10vh 8vw 4vh;
+  gap: 6vw;
+}
+.contact-kicker {
+  font-family: var(--f-body);
+  font-size: .72rem;
+  letter-spacing: .4em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 1.5rem;
+}
+.contact-headline {
+  font-family: var(--f-display);
+  font-size: clamp(2.8rem, 5vw, 5.5rem);
+  font-weight: 900;
+  line-height: .95;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 2rem;
+}
+.contact-headline em { font-style: italic; font-weight: 400; }
+.contact-note {
+  font-family: var(--f-fell);
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--mid);
+  max-width: 32ch;
+}
+.contact-detail {
+  border-top: 1px solid rgba(10,10,10,.15);
+  padding: 1.2rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.contact-detail:last-of-type { border-bottom: 1px solid rgba(10,10,10,.15); }
+.contact-detail-label {
+  font-family: var(--f-body);
+  font-size: .88rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--mid);
+}
+.contact-detail-value {
+  font-family: var(--f-serif);
+  font-size: 1.1rem;
+  color: var(--ink);
+}
+.contact-detail-value:hover { text-decoration: underline; text-underline-offset: 3px; }
+.contact-cta-big {
+  display: inline-block;
+  margin-top: 2.5rem;
+  padding: 1.2rem 3rem;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--f-body);
+  font-size: .88rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  transition: all .4s;
+}
+.contact-cta-big:hover { background: var(--vivid); }
+.contact-footer {
+  border-top: 1px solid rgba(10,10,10,.15);
+  padding: 1.8rem 8vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-brand {
+  font-family: var(--f-display);
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.footer-copy {
+  font-family: var(--f-body);
+  font-size: .92rem;
+  letter-spacing: .1em;
+  color: var(--mid);
+}
+.footer-social { display: flex; gap: 1.5rem; }
+.footer-social a {
+  font-family: var(--f-body);
+  font-size: .92rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--mid);
+  transition: color .3s;
+}
+.footer-social a:hover { color: var(--ink); }
+
+/* ═══════════════════════════════════════════════════════
+   HERO OFFER BANNER
+═══════════════════════════════════════════════════════ */
+.hero-offer {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .7rem;
+  animation: fadeIn 1s 1.2s both;
+}
+.offer-badge {
+  font-family: var(--f-body);
+  font-size: 1.5rem;
+  letter-spacing: .35em;
+  text-transform: uppercase;
+  background: var(--vivid);
+  color: var(--vivid-txt);
+  padding: .35rem 1.1rem;
+}
+.offer-text {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-family: var(--f-body);
+  font-size: 2rem;
+  color: var(--paper);
+}
+.offer-row {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .4rem;
+}
+.orig-price {
+  text-decoration: line-through;
+  text-decoration-color: var(--vivid);
+  text-decoration-thickness: 2px;
+  color: var(--mid);
+  font-size: 1.92rem;
+}
+.disc-price {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.9rem;
+}
+.offer-hours {
+  font-size: 1.88rem;
+  color: var(--mid);
+  letter-spacing: .1em;
+}
+.offer-sep { color: var(--mid); font-size: 1.85rem; }
+.offer-sub {
+  font-family: var(--f-body);
+  font-size: 1.25rem;
+  letter-spacing: .12em;
+  color: var(--paper);
+  opacity: .85;
+}
+.offer-sub strong { color: var(--accent); }
+.card-name-label {
+  font-family: var(--f-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: .8rem;
+  font-style: italic;
+}
+
+/* ═══════════════════════════════════════════════════════
+   KEYFRAMES
+═══════════════════════════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes arrowBounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(8px); }
+}
+
+/* ═══════════════════════════════════════════════════════
+   SCROLL ANIMATIONS
+═══════════════════════════════════════════════════════ */
+[data-anim] {
+  transition-property: opacity, transform;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  transition-duration: 0s;
+}
+body.anim-ready [data-anim] {
+  transition-duration: 0.9s;
+}
+body.anim-ready [data-anim="fade-up"] {
+  opacity: 0;
+  transform: translateY(32px);
+}
+body.anim-ready [data-anim="fade-left"] {
+  opacity: 0;
+  transform: translateX(-36px);
+}
+body.anim-ready [data-anim="fade-right"] {
+  opacity: 0;
+  transform: translateX(36px);
+}
+body.anim-ready [data-anim="fade"] {
+  opacity: 0;
+}
+body.anim-ready [data-anim].in-view {
+  opacity: 1 !important;
+  transform: none !important;
+}
+[data-delay="1"] { transition-delay: 0.1s; }
+[data-delay="2"] { transition-delay: 0.2s; }
+[data-delay="3"] { transition-delay: 0.35s; }
+[data-delay="4"] { transition-delay: 0.5s; }
+[data-delay="5"] { transition-delay: 0.65s; }
+[data-delay="6"] { transition-delay: 0.8s; }
+
+/* ═══════════════════════════════════════════════════════
+   MOBILE
+═══════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  .snap-container {
+    height: auto;
+    overflow-y: visible;
+    scroll-snap-type: none;
+  }
+  .slide {
+    scroll-snap-align: none;
+    min-height: auto;
+    height: auto;
+    display: block;
+    overflow: visible;
+  }
+  .slide-indicator { display: none; }
+
+  nav { padding: .9rem 1.2rem; }
+  nav::before { background: linear-gradient(to bottom, rgba(10,10,10,.95), transparent); }
+  .nav-logo { font-size: .75rem; }
+  .nav-links { gap: 1rem; }
+  .nav-links a { font-size: .7rem; }
+
+  /* HERO */
+  #slide-hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100svh;
+    padding: 0 1.5rem;
+  }
+  .hero-rule-top { left: 1.2rem; right: 1.2rem; top: 7vh; }
+  .hero-rule-top span { font-size: .55rem; letter-spacing: .25em; }
+  .hero-headline { font-size: clamp(2.4rem, 11vw, 3.8rem); }
+  .hero-kicker { font-size: 1rem; }
+  .hero-starting-price { margin-top: 1.5rem; }
+  .hero-offer { margin-top: 1.2rem; }
+  .offer-text { font-size: .88rem; gap: .4rem; }
+  .offer-badge { font-size: .65rem; }
+  .hero-starting-price span { font-size: .72rem; }
+  .scroll-hint { bottom: 2rem; }
+
+  /* INTRO */
+  #slide-intro {
+    display: block;
+    padding: 5rem 1.5rem 3rem;
+    background: var(--paper);
+    color: var(--ink);
+  }
+  .intro-divider { display: none; }
+  .intro-left { margin-bottom: 2.5rem; }
+  .intro-headline { font-size: clamp(2.2rem, 10vw, 3.2rem); }
+  .intro-pull { font-size: .95rem; margin-top: 1.5rem; }
+  .intro-stats { gap: 1.5rem; margin-top: 1.5rem; }
+  .stat-num { font-size: 1.6rem; }
+  .stat-label { font-size: .62rem; }
+  .intro-right { margin-top: 0; }
+  .intro-body { column-count: 1; font-size: .9rem; }
+  .intro-img-grid { grid-template-columns: 1fr 1fr; gap: .4rem; margin-top: 1.5rem; }
+  .intro-img-grid img { height: 120px; }
+
+  /* BOOTH */
+  #slide-booth { display: block; background: var(--ink); }
+  .booth-left { height: 52vw; min-height: 200px; }
+  .booth-left img { height: 100%; }
+  .booth-left-overlay { background: linear-gradient(to bottom, transparent 40%, var(--ink) 100%); }
+  .booth-right { padding: 2rem 1.5rem 3.5rem; display: block; }
+  .booth-headline { font-size: clamp(2rem, 9vw, 3rem); margin-bottom: 1.2rem; }
+  .booth-body { font-size: .92rem; max-width: 100%; }
+  .booth-features { grid-template-columns: 1fr 1fr; gap: .5rem 1rem; margin-bottom: 2rem; }
+  .feature-item { font-size: .95rem; }
+
+  /* COLOUR */
+  #slide-colour { display: block; }
+  .colour-left { padding: 3rem 1.5rem 2rem; display: block; }
+  .colour-stamp { font-size: .6rem; margin-bottom: 1.5rem; }
+  .colour-headline { font-size: clamp(2.8rem, 13vw, 4.5rem); margin-bottom: 1.2rem; }
+  .colour-body { font-size: 1rem; max-width: 100%; margin-bottom: 1.5rem; }
+  .colour-options { margin-bottom: 2rem; }
+  .colour-right { height: 55vw; min-height: 200px; }
+  .colour-right img { height: 100%; }
+  .colour-photo-caption { display: none; }
+
+  /* PRICING */
+  #slide-pricing { display: block; padding: 4rem 1.5rem 3.5rem; }
+  .pricing-header { margin-bottom: 2rem; text-align: center; }
+  .pricing-headline { font-size: clamp(1.8rem, 9vw, 2.8rem); }
+  .pricing-grid { display: flex; flex-direction: column; gap: 1.2rem; }
+  .price-card { padding: 1.5rem; }
+  .card-price { font-size: 2.4rem; }
+  .pricing-included { padding: 1.4rem 1.2rem; margin-top: 1.5rem; }
+  .pricing-included-list { grid-template-columns: 1fr 1fr; gap: .5rem 1rem; }
+  .pricing-included-list li { font-size: .88rem; }
+  .pricing-addon { margin-top: 1.5rem; }
+  .pricing-addon p { font-size: .78rem; line-height: 1.7; }
+
+  /* ADD-ONS */
+  #slide-addons { display: block; padding: 4rem 1.5rem 3rem; align-items: stretch; }
+  .addons-headline { font-size: clamp(2rem, 10vw, 3rem); margin-bottom: 2rem; }
+  .addons-grid { display: flex; flex-direction: column; }
+  .addon-card { border-right: none; border-bottom: 1px solid rgba(10,10,10,.12); padding: 2rem 0; }
+  .addon-card:not(:first-child) { padding-left: 0; }
+  .addon-card:last-child { border-bottom: none; }
+  .addon-photo { height: 160px; }
+  .addons-rates { margin-top: 3vh; width: 100%; border-top: 1px solid rgba(10,10,10,.12); padding-top: 2rem; }
+  .addons-rates-label { font-family: var(--f-body); font-size: .72rem; letter-spacing: .4em; text-transform: uppercase; color: var(--mid); margin-bottom: 1rem; }
+  .addons-rates-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem 1rem; align-items: center; font-family: var(--f-body); font-size: 1.05rem; color: var(--ink); }
+  .addons-rates-grid strong { color: var(--ink); font-weight: 700; }
+  .addons-footnote { margin-top: 2rem; font-size: .8rem; }
+
+  /* WHY */
+  #slide-why { display: block; padding: 4rem 1.5rem 3.5rem; text-align: center; }
+  .why-rule { margin: 0 auto 2rem; }
+  .why-headline { font-size: clamp(1.5rem, 7vw, 2.4rem); margin: 0 auto 2.5rem; }
+  .why-grid { grid-template-columns: 1fr; gap: 1.5rem; max-width: 100%; margin: 0 auto 2.5rem; }
+  .why-num { font-size: 2rem; }
+  .why-body { font-size: .9rem; margin: 0 auto 2rem; }
+
+  /* CONTACT */
+  #slide-contact { display: block; padding: 0; }
+  .contact-main { display: block; padding: 5rem 1.5rem 2.5rem; }
+  .contact-left { margin-bottom: 2.5rem; }
+  .contact-headline { font-size: clamp(2.5rem, 12vw, 4rem); margin-bottom: 1rem; }
+  .contact-note { max-width: 100%; font-size: .92rem; }
+  .contact-detail { flex-direction: column; align-items: flex-start; gap: .3rem; padding: 1rem 0; }
+  .contact-detail-value { font-size: .85rem; word-break: break-all; }
+  .contact-cta-big { display: block; text-align: center; margin-top: 2rem; padding: 1rem; }
+  .contact-footer { flex-direction: column; gap: .8rem; text-align: center; padding: 1.5rem; }
+
+  .pricing-offer-bar { flex-direction: column; gap: .5rem; padding: .7rem .8rem; }
+  .pricing-offer-badge { font-size: .72rem; letter-spacing: .2em; padding: .25rem .6rem; }
+  .pricing-offer-text { font-size: .82rem; gap: .3rem; }
+  .p-orig { font-size: .82rem; }
+  .p-disc { font-size: .82rem; }
+  .p-hrs  { font-size: .75rem; }
+  .p-note { font-size: .78rem; }
+  .card-duration { font-size: .88rem; }
+  .card-price { font-size: 2.8rem; }
+  .hero-events { font-size: .4em; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#slide-hero" class="nav-logo">Taylor-Made Events</a>
+  <ul class="nav-links">
+    <li><a href="#slide-intro">About</a></li>
+    <li><a href="#slide-pricing">Pricing</a></li>
+    <li><a href="#slide-contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- DOT INDICATOR (desktop only) -->
+<div class="slide-indicator" id="indicator">
+  <button class="ind-dot active" data-slide="0" aria-label="Hero"></button>
+  <button class="ind-dot" data-slide="1" aria-label="About"></button>
+  <button class="ind-dot" data-slide="2" aria-label="The Booth"></button>
+  <button class="ind-dot" data-slide="3" aria-label="Colour"></button>
+  <button class="ind-dot" data-slide="4" aria-label="Pricing"></button>
+  <button class="ind-dot" data-slide="5" aria-label="Add-ons"></button>
+  <button class="ind-dot" data-slide="6" aria-label="Why Us"></button>
+  <button class="ind-dot" data-slide="7" aria-label="Contact"></button>
+</div>
+
+<!-- SNAP CONTAINER -->
+<div class="snap-container" id="snapContainer">
+
+<!-- SLIDE 1: HERO -->
+<section class="slide" id="slide-hero" data-slide="0">
+  <div class="hero-bg"></div>
+  <div class="hero-rule-top">
+    <span>Windsor, Ontario</span>
+    <div class="hr-line"></div>
+    <span>Est. 2025</span>
+    <div class="hr-line"></div>
+    <span>Photo &amp; Video Rentals</span>
+  </div>
+  <div class="hero-content">
+    <p class="hero-kicker">Luxury Photo Booth &amp; Video Rentals</p>
+    <h1 class="hero-headline">Taylor&#8209;Made<span class="hero-events">Events</span></h1>
+    <div class="hero-starting-price">
+      <div class="price-line"></div>
+      <span>Packages starting from $450</span>
+      <div class="price-line"></div>
+    </div>
+    <div class="hero-offer">
+      <span class="offer-badge">&#x1F525; Limited Time Offer</span>
+      <p class="offer-text">
+        <span class="offer-row"><span class="orig-price">$550</span><span class="disc-price">$450</span> <span class="offer-hours">2 hrs</span></span>
+        <span class="offer-sep">·</span>
+        <span class="offer-row"><span class="orig-price">$650</span><span class="disc-price">$550</span> <span class="offer-hours">3 hrs</span></span>
+        <span class="offer-sep">·</span>
+        <span class="offer-row"><span class="orig-price">$750</span><span class="disc-price">$650</span> <span class="offer-hours">4 hrs</span></span>
+      </p>
+      <p class="offer-sub"><strong>$100 off any package</strong> — for a limited time</p>
+    </div>
+  </div>
+  <div class="scroll-hint" id="scrollHint">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- SLIDE 2: INTRO -->
+<section class="slide" id="slide-intro" data-slide="1">
+  <div class="intro-left" data-anim="fade-left">
+    <p class="intro-date">Windsor, Ontario &nbsp;·&nbsp; Photo &amp; Video Rentals</p>
+    <h2 class="intro-headline">Every<br>celebration<br><em>tells a story</em></h2>
+    <blockquote class="intro-pull">
+      DSLR-sharp portraits. Studio lighting. Instant galleries. We bring the full photo studio to your event — without the setup stress.
+    </blockquote>
+    <div class="intro-stats">
+      <div class="stat-item" data-anim="fade-up" data-delay="2">
+        <span class="stat-num">13+</span>
+        <span class="stat-label">Inclusions<br>per package</span>
+      </div>
+      <div class="stat-item" data-anim="fade-up" data-delay="3">
+        <span class="stat-num">24h</span>
+        <span class="stat-label">Response<br>guarantee</span>
+      </div>
+      <div class="stat-item" data-anim="fade-up" data-delay="4">
+        <span class="stat-num">5★</span>
+        <span class="stat-label">Guest<br>experience</span>
+      </div>
+    </div>
+  </div>
+  <div class="intro-divider"></div>
+  <div class="intro-right" data-anim="fade-right">
+    <div class="intro-body">
+      <p>Designed for <strong>weddings, corporate galas, and milestone celebrations</strong>, our photo booth delivers studio-quality photos, dynamic videos, and boomerangs — all with professional lighting and instant sharing.</p>
+      <p>It's a <strong>tailored experience</strong> that adds energy, elegance, and unforgettable moments to your occasion. From customized overlays and branded galleries to on-site attendants — every detail is <strong>Taylor-Made for you</strong>.</p>
+    </div>
+    <div class="intro-img-grid">
+      <img src="https://static.wixstatic.com/media/5aba2c_ede444a1cb7047caa2f83f0e163e62d1~mv2.jpg/v1/fill/w_600,h_600,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/5aba2c_ede444a1cb7047caa2f83f0e163e62d1~mv2.jpg" alt="Event photography">
+      <img src="https://static.wixstatic.com/media/5aba2c_481afc7d7e224900b4ca81b2b65a9321~mv2.jpg/v1/fill/w_600,h_600,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/5aba2c_481afc7d7e224900b4ca81b2b65a9321~mv2.jpg" alt="Photo booth guests">
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 3: BOOTH -->
+<section class="slide" id="slide-booth" data-slide="2">
+  <div class="booth-left" data-anim="fade">
+    <img src="https://static.wixstatic.com/media/5aba2c_576f8a74f66148e89a4d6e9528e9a27c~mv2.jpg/v1/fill/w_900,h_1100,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_1677_JPG.jpg" alt="The Taylor-Made Booth">
+    <div class="booth-left-overlay"></div>
+  </div>
+  <div class="booth-right" data-anim="fade-right">
+    <p class="booth-eyebrow">The Experience</p>
+    <h2 class="booth-headline"><span>Introducing</span>The&nbsp;Booth</h2>
+    <div class="booth-rule"></div>
+    <p class="booth-body">Professional DSLR camera. Studio-grade ring lighting. Elegant backdrop. On-site attendant. Every package includes everything you need — tailored for you. Delivery, setup and breakdown always included.</p>
+    <div class="booth-features">
+      <div class="feature-item">DSLR Camera + Studio Lighting</div>
+      <div class="feature-item">Choice of Standard Backdrop</div>
+      <div class="feature-item">Unlimited Photo Sessions</div>
+      <div class="feature-item">Instant Sharing (text, email, AirDrop &amp; QR)</div>
+      <div class="feature-item">Customized Start Screen</div>
+      <div class="feature-item">Customized Digital Overlay</div>
+      <div class="feature-item">Customized Online Gallery</div>
+      <div class="feature-item">Password-Protected Gallery</div>
+      <div class="feature-item">Customized LED Ring Light</div>
+      <div class="feature-item">HD GIFs &amp; Boomerangs</div>
+      <div class="feature-item">Filters &amp; Face Effects</div>
+      <div class="feature-item">On-site Attendant</div>
+      <div class="feature-item">Delivery, Setup &amp; Breakdown</div>
+    </div>
+    <a href="#slide-pricing" class="cta-btn">See Full Packages</a>
+  </div>
+</section>
+
+<!-- SLIDE 4: COLOUR -->
+<section class="slide" id="slide-colour" data-slide="3">
+  <div class="colour-left" data-anim="fade-left">
+    <span class="colour-stamp">Signature Experience</span>
+    <h2 class="colour-headline">Vivid<br>Colour<em>Finish</em></h2>
+    <p class="colour-body">Beyond the timeless black and white — choose our vibrant colour finish for images that burst with life. Every frame a portrait, every portrait a memory. Both finishes available on every booking.</p>
+    <div class="colour-options">
+      <div class="colour-option"><div class="colour-swatch bw"></div>Black &amp; White</div>
+      <div class="colour-option"><div class="colour-swatch col"></div>Vivid Colour</div>
+    </div>
+    <a href="#slide-contact" class="colour-cta">Reserve Your Date</a>
+  </div>
+  <div class="colour-right" data-anim="fade-right">
+    <img src="https://static.wixstatic.com/media/5aba2c_6a941664839c4b8fa2f87fe5e8e38d1b~mv2.jpg/v1/fill/w_800,h_900,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/5aba2c_6a941664839c4b8fa2f87fe5e8e38d1b~mv2.jpg" alt="Colour photo booth">
+    <div class="colour-right-overlay"></div>
+    <p class="colour-photo-caption">Taylor-Made · Windsor, ON</p>
+  </div>
+</section>
+
+<!-- SLIDE 5: PRICING -->
+<section class="slide" id="slide-pricing" data-slide="4">
+  <div class="pricing-header" data-anim="fade-up">
+    <p class="pricing-eyebrow">Digital Booth Pricing</p>
+    <h2 class="pricing-headline">Choose Your Experience</h2>
+    <div class="pricing-offer-bar">
+      <span class="pricing-offer-badge">&#x1F525; Limited Time Offer</span>
+      <span class="pricing-offer-text">
+        <span class="p-orig">$550</span><span class="p-disc">$450</span><span class="p-hrs">2 hrs</span>
+        <span class="p-sep">·</span>
+        <span class="p-orig">$650</span><span class="p-disc">$550</span><span class="p-hrs">3 hrs</span>
+        <span class="p-sep">·</span>
+        <span class="p-orig">$750</span><span class="p-disc">$650</span><span class="p-hrs">5 hrs</span>
+        <span class="p-sep">·</span>
+        <span class="p-note">$100 off any package</span>
+      </span>
+    </div>
+  </div>
+
+  <div class="pricing-grid">
+    <!-- 2 Hours -->
+    <div class="price-card" data-anim="fade-up" data-delay="1">
+      <p class="card-duration">2 Hours</p>
+      <div class="card-price"><sup>$</sup>450</div>
+      <span class="card-per"></span>
+      <div class="card-rule"></div>
+      <p class="card-best-for"><em>Best for:</em> birthdays, baby showers &amp; smaller gatherings</p>
+      <a href="#slide-contact" class="card-cta">Book This</a>
+    </div>
+
+    <!-- 3 Hours -->
+    <div class="price-card featured" data-anim="fade-up" data-delay="2">
+      <div class="price-tag">Most Popular</div>
+      <p class="card-duration">3 Hours</p>
+      <div class="card-price"><sup>$</sup>550</div>
+      <span class="card-per"></span>
+      <div class="card-rule"></div>
+      <p class="card-best-for"><em>Best for:</em> parties, socials &amp; milestone celebrations</p>
+      <a href="#slide-contact" class="card-cta">Book This</a>
+    </div>
+
+    <!-- 4 Hours -->
+    <div class="price-card" data-anim="fade-up" data-delay="3">
+      <p class="card-duration">4 Hours</p>
+      <div class="card-price"><sup>$</sup>650</div>
+      <span class="card-per"></span>
+      <div class="card-rule"></div>
+      <p class="card-best-for"><em>Best for:</em> weddings, corporate events &amp; larger gatherings</p>
+      <a href="#slide-contact" class="card-cta">Book This</a>
+    </div>
+
+    <!-- Video Guestbook -->
+    <div class="price-card" data-anim="fade-up" data-delay="4">
+      <p class="card-duration">Video Guestbook</p>
+      <div class="card-price"><sup>$</sup>650</div>
+      <span class="card-per">2 hrs · standalone</span>
+      <div class="card-rule"></div>
+      <p class="card-best-for"><em>Best for:</em> weddings &amp; milestone events where guests record heartfelt video messages to the couple</p>
+      <a href="#slide-contact" class="card-cta">Book This</a>
+    </div>
+  </div>
+
+  <!-- INCLUDED WITH EVERY EXPERIENCE -->
+  <div class="pricing-included" data-anim="fade-up" data-delay="2">
+    <p class="pricing-included-label">Included with Every Experience</p>
+    <ul class="pricing-included-list">
+      <li>DSLR camera + professional studio lighting</li>
+      <li>Choice of standard backdrop + curated props</li>
+      <li>Unlimited photo sessions</li>
+      <li>Custom start screen &amp; branded digital overlay</li>
+      <li>Filters, face effects, HD GIFs &amp; boomerangs</li>
+      <li>Instant sharing via QR, text, email &amp; AirDrop</li>
+      <li>Customized LED ring light colour</li>
+      <li>Password-protected online gallery</li>
+      <li>On-site attendant throughout</li>
+      <li>Delivery, setup &amp; full breakdown</li>
+    </ul>
+  </div>
+
+  <div class="pricing-addon">
+    <p>+ Add Unlimited Printing <strong>$200</strong> &nbsp;·&nbsp; Additional Digital Hours <strong>$75/hr</strong> &nbsp;·&nbsp; Additional Print Hours <strong>$125/hr</strong> &nbsp;·&nbsp; Extended Digital Storage <strong>$45</strong></p>
+  </div>
+</section>
+
+<!-- SLIDE 6: PRESERVE THE MOMENT -->
+<section class="slide" id="slide-addons" data-slide="5">
+  <p class="addons-eyebrow" data-anim="fade-up">Souvenir Add-Ons</p>
+  <h2 class="addons-headline" data-anim="fade-up" data-delay="1">Preserve<em>The Moment</em></h2>
+  <div class="addons-grid" style="grid-template-columns: repeat(2,1fr);">
+    <div class="addon-card" data-anim="fade-up" data-delay="1">
+      <img class="addon-photo" src="https://static.wixstatic.com/media/5aba2c_1b04f88e21c94fe886c8492a401119c9~mv2.jpg/v1/fill/w_600,h_400,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_1656_JPG.jpg" alt="Signature Photo Guest Book">
+      <p class="addon-name">The Signature Photo Guest Book</p>
+      <div class="addon-price-row">
+        <div class="addon-price"><sup>$</sup>175</div>
+        <span class="addon-note">requires print package</span>
+      </div>
+      <p class="addon-desc">Elevate your unlimited print package with a beautifully curated photo guest book, assembled in real time during your event. Each guest's photo is carefully placed alongside their handwritten message, creating a heartfelt keepsake filled with laughter, love, and personal memories from your celebration.</p>
+      <p class="addon-desc" style="margin-top:.6rem;">Designed to be treasured long after the event ends, this addition transforms printed moments into a timeless storybook of your special day.</p>
+      <ul class="addon-includes">
+        <li>Curated layout &amp; assembly</li>
+        <li>Built live during your event</li>
+        <li>Handwritten guest messages</li>
+        <li>Heartfelt keepsake book</li>
+        <li>Premium book finish</li>
+      </ul>
+    </div>
+    <div class="addon-card" data-anim="fade-up" data-delay="2">
+      <img class="addon-photo" src="https://static.wixstatic.com/media/5aba2c_620626f2f3994b5888ad980b997a0c6a~mv2.jpg/v1/fill/w_600,h_400,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Wedding-Video-Books-The-Motion-Books-Wedding-Book-Open.jpg" alt="Signature Video Keepsake">
+      <p class="addon-name">The Signature Video Keepsake</p>
+      <div class="addon-price-row">
+        <div class="addon-price"><sup>$</sup>250</div>
+        <span class="addon-note">luxury display book</span>
+      </div>
+      <p class="addon-desc">Transform your video guest messages into a beautifully crafted, ready-to-play keepsake. Encased in a luxury display book, your heartfelt moments come to life at the touch of a button — allowing you to relive the laughter, love, and well-wishes whenever you choose. A timeless addition designed to be treasured for years to come.</p>
+      <ul class="addon-includes">
+        <li>7-inch HD Display</li>
+        <li>No Internet or Wires Needed to Play</li>
+        <li>4GB of Reusable Memory</li>
+        <li>4 Hours of Play Time</li>
+        <li>Customized Cover Art with Custom Titles</li>
+        <li>Choice of Fine Linen or Hard Cover</li>
+        <li>Choice of Cover Colors</li>
+        <li>90-Day Limited Warranty for Defects</li>
+      </ul>
+    </div>
+  </div>
+  <div class="addons-rates" data-anim="fade-up" data-delay="3">
+    <p class="addons-rates-label">Additional Hours</p>
+    <div class="addons-rates-grid">
+      <span>DSLR Digital</span><strong>$75/hr</strong>
+      <span>Video Guestbook</span><strong>$85/hr</strong>
+      <span>Unlimited Prints</span><strong>$125/hr</strong>
+      <span>Extended Digital Storage</span><strong>$45</strong>
+    </div>
+  </div>
+  <p class="addons-footnote">+ Add Unlimited Printing to any package for $200 — prints handed to guests on the spot, every session, no limits.</p>
+</section>
+
+<!-- SLIDE 7: WHY -->
+<section class="slide" id="slide-why" data-slide="6">
+  <div class="why-rule" data-anim="fade-up">
+    <div class="why-rule-line"></div>
+    <span class="why-rule-text">Why Taylor-Made Events</span>
+    <div class="why-rule-line"></div>
+  </div>
+  <h2 class="why-headline" data-anim="fade-up" data-delay="1">"Every great event deserves to be remembered. We make sure yours is."</h2>
+  <div class="why-grid" data-anim="fade-up" data-delay="2">
+    <div class="why-item"><span class="why-num">13+</span><span class="why-label">Inclusions in<br>every package</span></div>
+    <div class="why-item"><span class="why-num">24h</span><span class="why-label">Enquiry<br>response time</span></div>
+    <div class="why-item"><span class="why-num">∞</span><span class="why-label">Photo sessions<br>per booking</span></div>
+  </div>
+  <p class="why-body">From DSLR-sharp portraits to instant shareable galleries — Taylor-Made Events delivers professional studio quality with zero compromise. No setup stress. No surprise costs. Just flawless results your guests will be sharing for years.</p>
+  <p class="why-location">Windsor · Ontario · Canada</p>
+</section>
+
+<!-- SLIDE 8: CONTACT -->
+<section class="slide" id="slide-contact" data-slide="7">
+  <div class="contact-main">
+    <div class="contact-left" data-anim="fade-left">
+      <p class="contact-kicker">Let's Talk</p>
+      <h2 class="contact-headline">Book<br>Your<br><em>Date</em></h2>
+      <p class="contact-note">We respond to all enquiries within 24 hours. Whether you're ready to book or just exploring options — we'd love to hear from you.</p>
+    </div>
+    <div class="contact-right" data-anim="fade-right">
+      <div class="contact-detail">
+        <span class="contact-detail-label">Email</span>
+        <a href="mailto:info@taylor-madeevents.com" class="contact-detail-value">info@taylor-madeevents.com</a>
+      </div>
+      <div class="contact-detail">
+        <span class="contact-detail-label">Location</span>
+        <span class="contact-detail-value">Windsor, Ontario, Canada</span>
+      </div>
+      <div class="contact-detail">
+        <span class="contact-detail-label">Phone</span>
+        <a href="tel:+12267394120" class="contact-detail-value">(226) 739-4121</a>
+      </div>
+      <div class="contact-detail">
+        <span class="contact-detail-label">Instagram</span>
+        <a href="https://www.instagram.com/taylormadebooth" target="_blank" class="contact-detail-value">@TaylorMadeBooth</a>
+      </div>
+      <div class="contact-detail">
+        <span class="contact-detail-label">Tiktok</span>
+        <a href="https://www.tiktok.com/@TaylorMadeBooth" target="_blank" class="contact-detail-value">@TaylorMadeBooth</a>
+      </div>
+      <div class="contact-detail">
+        <span class="contact-detail-label">Facebook</span>
+        <a href="https://www.facebook.com/profile.php?id=61580993053756" target="_blank" class="contact-detail-value">Taylor-Made Events</a>
+      </div>
+      <a href="mailto:info@taylor-madeevents.com" class="contact-cta-big">Request a Booking</a>
+    </div>
+  </div>
+  <footer class="contact-footer">
+    <a href="#slide-hero" class="footer-brand">Taylor-Made Events</a>
+    <span class="footer-copy">© 2025 All Rights Reserved</span>
+    <ul class="footer-social">
+      <li><a href="https://www.instagram.com/taylormadebooth" target="_blank">Instagram</a></li>
+      <li><a href="https://www.tiktok.com/@TaylorMadeBooth" target="_blank">TikTok</a></li>
+      <li><a href="https://www.facebook.com/profile.php?id=61580993053756" target="_blank">Facebook</a></li>
+    </ul>
+  </footer>
+</section>
+
+</div><!-- end snap-container -->
+
+<script>
+function a () {
+  const isMobile = () => window.innerWidth <= 768;
+  const slides = document.querySelectorAll('.slide');
+  const dots   = document.querySelectorAll('.ind-dot');
+  const snap   = document.getElementById('snapContainer');
+  const lightSlides = new Set(['slide-intro','slide-addons','slide-contact']);
+
+  window.addEventListener('load', () => {
+    document.body.classList.add('anim-ready');
+    initAnimObserver();
+  });
+
+  function initAnimObserver() {
+    const animEls = document.querySelectorAll('[data-anim]');
+    const root = isMobile() ? null : snap;
+    const animObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          animObserver.unobserve(entry.target);
+        }
+      });
+    }, { root: root, threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    animEls.forEach(el => animObserver.observe(el));
+  }
+
+  if (!isMobile()) {
+    const snapObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const idx = +entry.target.dataset.slide;
+          dots.forEach((d,i) => d.classList.toggle('active', i === idx));
+          document.body.classList.toggle('on-light', lightSlides.has(entry.target.id));
+        }
+      });
+    }, { root: snap, threshold: 0.5 });
+    slides.forEach(s => snapObserver.observe(s));
+  }
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const idx = +dot.dataset.slide;
+      const target = slides[idx];
+      if (isMobile()) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        snap.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
+      }
+    });
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      if (isMobile()) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        snap.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
+      }
+    });
+  });
+
+  const hint = document.getElementById('scrollHint');
+  if (hint) {
+    hint.addEventListener('click', () => {
+      const intro = document.getElementById('slide-intro');
+      if (isMobile()) {
+        intro.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        snap.scrollTo({ top: intro.offsetTop, behavior: 'smooth' });
+      }
+    });
+  }
+}
+a();
+</script>
+</body>
+</html>
